@@ -1,3 +1,5 @@
+from mpl_toolkits.mplot3d import axes3d
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -13,38 +15,44 @@ class Robot(object):
         g  = q2 + q1
         h  = g + q3
 
-        x1 = 0  + self.l1*np.cos(q1 * (np.pi/180))
-        y1 = 0  + self.l1*np.sin(q1 * (np.pi/180))
+        x0 = 0
+        y0 = 0
+        z0 = self.l0;
 
+        x1 = x0 + self.l1*np.cos(q1 * (np.pi/180))
+        y1 = y0 + self.l1*np.sin(q1 * (np.pi/180))
+        z1 = z0;
         x2 = x1 + self.l2*np.cos(g * (np.pi/180))
         y2 = y1 + self.l2*np.sin(g * (np.pi/180))
-
+        z2 = z1
         x3 = x2 + self.l3*np.cos(h * (np.pi/180))
         y3 = y2 + self.l3*np.sin(h * (np.pi/180))
+        z3 = z2
+        x  = [0, x0, x1, x2, x3]
+        y  = [0, y0, y1, y2, y3]
+        z  = [0, z0 ,z1, z2, z3]
 
-        x  = [0, x1, x2, x3]
-        y  = [0, y1, y2, y3]
-        z  = [0, 0, 0, self.l0]
-        return (x,y,z)
+        return (x, y, z)
+        
 
     def draw2D(self, x, y, z=0):
         # Plot the robot at plane
-        fig = plt.figure(1)
-        wsp = fig.add_subplot(111)
-        wsp.plot([0,1] , [0,0], c='r') # Eje X
-        wsp.plot([0,0] , [0,1], c='g') # Eje Y
-        wsp.plot(x , y , c='k')             # Robot
+        fig2d = plt.figure()
+        axs2d = fig2d.add_subplot(111)
+        axs2d.plot([0,1] , [0,0], c='r') # Eje X
+        axs2d.plot([0,0] , [0,1], c='g') # Eje Y
+        axs2d.plot(x , y , c='k')             # Robot
         plt.show()
         return
 
     def draw3D(self, x, y, z):
         # Move the robot at space
-        fig = plt.figure(1)
-        wsp = fig.add_subplot(111, projection='3d')
-        wsp.plot([0,1] , [0,0] , [0,0] , c='r') # Eje X
-        wsp.plot([0,0] , [0,1] , [0,0] , c='g') # Eje Y
-        wsp.plot([0,0] , [0,0] , [0,1] , c='b') # Eje Z
-        wsp.plot(x , y , z , c='k')             # Robot
+        fig3d = plt.figure()
+        axs3d = fig3d.add_subplot(111, projection='3d')
+        axs3d.plot([0,1] , [0,0] , [0,0] , c='r') # Eje X
+        axs3d.plot([0,0] , [0,1] , [0,0] , c='g') # Eje Y
+        axs3d.plot([0,0] , [0,0] , [0,1] , c='b') # Eje Z
+        axs3d.plot(x , y , z , c='k')             # Robot
         plt.show()
         return
 
@@ -115,3 +123,4 @@ if __name__ == '__main__':
     Scara.draw2D(x, y)
 
     Scara.draw3D(x, y, z)
+
