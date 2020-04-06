@@ -40,12 +40,6 @@ def contours(blob,frame, textColor, verbose = True):
 	return (x, y, frame)
 
 def getAngle(xf, yf, xm, ym):
-	if (yf == 0 ):
-		yf = 1
-		xf = 1
-	if (ym == 0):
-		ym = 0
-		xm = 0
 	dy = ym - yf
 	dx = xm - xf
 	angle = np.arctan2(dy,dx) * (180/np.pi)
