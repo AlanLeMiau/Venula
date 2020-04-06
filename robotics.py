@@ -18,7 +18,6 @@ class Robot(object):
         # self.y = 0
         # self.z = l0
 
-
     def getPosition(self, q1, q2, q3=0):
         # Get position for first two angles (RR robot)
         g  = q2 + q1
@@ -42,7 +41,6 @@ class Robot(object):
         z  = [0, z0 ,z1, z2, z3]
 
         return (x, y, z)
-        
 
     def draw2D(self, mode, a, b, c):
         fig2d = plt.figure()
@@ -133,8 +131,7 @@ class Robot(object):
     # def __repr__(self):
     #     return 'Coordinate(' + str(self.getX()) + ', ' + str(self.getY()) + ')'
 
-if __name__ == '__main__':
-
+def main():
     Scara = Robot(30, 27, 27, 3)
 
     (q1, q2, q3) = Scara.inverseKinematic(30, 10)
@@ -157,3 +154,5 @@ if __name__ == '__main__':
     Scara.draw2D("angles", q1, q2, q3)
     # Scara.draw3D(x, y, z)
 
+if __name__ == '__main__':
+    main()
