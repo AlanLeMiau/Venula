@@ -52,9 +52,10 @@ def main():
 	azul_altos  = np.array([125,255,255],dtype=np.uint8)
 
 	cap = cv2.VideoCapture(0)
-
+	
 	while (1):
 		ret,frame = cap.read()
+		frame = cv2.flip(frame, -1)
 		(height, width, layers) = frame.shape
 		hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 		
